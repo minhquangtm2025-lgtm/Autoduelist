@@ -27,6 +27,7 @@ public class AutoDuelistAI {
             MaceCombat.reset();
             WindChargeCombat.reset();
             PotionManager.reset();
+            ArmorManager.reset();
         }
     }
 

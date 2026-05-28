@@ -2,6 +2,7 @@ package com.autoduelist.client;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 public class CombatStrategy {
     
@@ -30,11 +31,16 @@ public class CombatStrategy {
             attackCooldown--;
         }
 
+        ArmorManager.update(player);
         HealingManager.update(player);
         ShieldManager.update(player, target);
         ProjectileDodger.update(player);
+        
         WeaponSwitcher.update(player, analysis);
+        
         ComboAttack.update(player, target);
+        
+        selectBestWeaponForSituation(player, distance);
         
         RangedCombat.update(player, target);
         MaceCombat.update(player, target);
@@ -68,6 +74,81 @@ public class CombatStrategy {
 
         if (CombatAnalyzer.shouldSprintAttack(analysis, playerHealth) && sprintTicks == 0) {
             performSprintAttack();
+        }
+    }
+
+    private void selectBestWeaponForSituation(Player player, double distance) {
+        if (distance > 100) {
+            switchToBestRangedWeapon(player);
+        } else if (distance < 16) {
+            switchToBestMeleeWeapon(player);
+        }
+    }
+
+    private void switchToBestRangedWeapon(Player player) {
+        int bowSlot = findWeaponSlot(player, InventoryAnalyzer.WeaponType.BOW);
+        int crossbowSlot = findWeaponSlot(player, InventoryAnalyzer.WeaponType.CROSSBOW);
+        int tridentSlot = findWeaponSlot(player, InventoryAnalyzer.WeaponType.TRIDENT);
+        
+        if (InventoryAnalyzer.hasArrows(player) && bowSlot != -1) {
+            switchToSlot(player, bowSlot);
+        } else if (crossbowSlot != -1) {
+            switchToSlot(player, crossbowSlot);
+        } else if (tridentSlot != -1) {
+            switchToSlot(player, tridentSlot);
+        }
+    }
+
+    private void switchToBestMeleeWeapon(Player player) {
+        int maceSlot = findWeaponSlot(player, InventoryAnalyzer.WeaponType.MACE);
+        int swordSlot = findWeaponSlot(player, InventoryAnalyzer.WeaponType.SWORD);
+        int axeSlot = findWeaponSlot(player, InventoryAnalyzer.WeaponType.AXE);
+        
+        if (maceSlot != -1) {
+            switchToSlot(player, maceSlot);
+        } else if (analysis.hasShield && axeSlot != -1) {
+            switchToSlot(player, axeSlot);
+        } else if (swordSlot != -1) {
+            switchToSlot(player, swordSlot);
+        }
+    }
+
+    private int findWeaponSlot(Player player, InventoryAnalyzer.WeaponType type) {
+        for (int i = 0; i < 9; i++) {
+            ItemStack stack = player.getInventory().getItem(i);
+            if (!stack.isEmpty()) {
+                String itemName = stack.getItem().toString().toLowerCase();
+                switch (type) {
+                    case BOW:
+                        if (itemName.contains("bow") && !itemName.contains("cross")) return i;
+                        break;
+                    case CROSSBOW:
+                        if (itemName.contains("crossbow")) return i;
+                        break;
+                    case TRIDENT:
+                        if (itemName.contains("trident")) return i;
+                        break;
+                    case MACE:
+                        if (itemName.contains("mace")) return i;
+                        break;
+                    case SWORD:
+                        if (itemName.contains("sword")) return i;
+                        break;
+                    case AXE:
+                        if (itemName.contains("axe")) return i;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        return -1;
+    }
+
+    private void switchToSlot(Player player, int slot) {
+        net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+        if (mc.gameMode != null) {
+            mc.gameMode.handleInventoryButtonClick(player.containerMenu.containerId, slot);
         }
     }
 
