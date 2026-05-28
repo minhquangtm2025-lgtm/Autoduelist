@@ -1,0 +1,6 @@
+{
+  "category.autoduelist": "AutoDuelist",
+  "key.autoduelist.toggle_ai": "Toggle AI Combat",
+  "autoduelist.enabled": "AutoDuelist AI Enabled",
+  "autoduelist.disabled": "AutoDuelist AI Disabled"
+}
