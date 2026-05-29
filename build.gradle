@@ -1,5 +1,5 @@
 plugins {
-	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
+	id 'fabric-loom' version "${loom_version}"
 	id 'maven-publish'
 }
 
@@ -61,12 +61,11 @@ java {
 }
 
 jar {
-	def projectName = project.name
-	inputs.property "projectName", projectName
-
 	from("LICENSE") {
-		rename { "${it}_$projectName"}
+		rename { "${it}_${project.name}"}
 	}
+	archiveBaseName = "AutoDuelist"
+	archiveVersion = "${project.mod_version}"
 }
 
 // configure the maven publication
