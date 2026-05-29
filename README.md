@@ -18,7 +18,7 @@ Yêu cầu:
 - Minecraft 1.21.11 (Java Edition)
 - Fabric Loader 0.19.2 trở lên
 - Fabric API 0.141.4 trở lên
-- Java 21 trở lên
+- Java 21 
 
 Các bước cài đặt:
 1. Tải và cài đặt Fabric Loader cho Minecraft 1.21.11
