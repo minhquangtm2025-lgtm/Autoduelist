@@ -40,6 +40,12 @@ public class CombatStrategy {
         
         ComboAttack.update(player, target);
         
+        WindChargeCombat.updateCombo(player);
+        
+        if (WindChargeCombat.isInCombo()) {
+            return;
+        }
+        
         selectBestWeaponForSituation(player, distance);
         
         RangedCombat.update(player, target);

@@ -45,12 +45,14 @@ AI sẽ tự động:
 - Phân tích vũ khí, giáp và khiên của đối thủ
 - Phân tích toàn bộ inventory và sắp xếp vũ khí vào hotbar
 - Tự động mặc giáp tốt nhất
+- Tự động cầm Totem of Undying khi máu < 30%
 - Chọn vũ khí phù hợp theo khoảng cách và tình huống
 - Tấn công, né tránh, dùng khiên, đổi vũ khí
 - Tự động ăn thức ăn khi máu thấp
 - Tự động ném thuốc khi cần
 - Chiến đấu tầm xa với bow/crossbow/trident
 - Sử dụng mace, wind charge và các vũ khí đặc biệt
+- Combo Wind Charge + Mace như cao thủ PvP
 
 ## Hệ thống class
 
@@ -88,7 +90,7 @@ Mod bao gồm 17 class chính:
 7. Trident (Đinh ba) - Phóng tầm xa
 
 ### Đặc biệt:
-8. Wind Charge (Cầu Gió) - Đẩy lùi đối thủ
+8. Wind Charge (Cầu Gió) - Đẩy lùi đối thủ, combo với Mace
 9. Splash Potion (Thuốc ném) - Gây sát thương hoặc hồi máu
 10. Shield (Khiên) - Block tự động
 
@@ -104,11 +106,13 @@ Mod bao gồm 17 class chính:
 - Crit Chain: Nhảy liên tục để tạo critical hits (+50% sát thương)
 - Shield Counter: Tự động giơ khiên khi bị tấn công
 - Weapon Counter: Đổi rìu khi gặp shield để phá vỡ phòng thủ
+- Wind Charge + Mace Combo: Ném Wind Charge xuống đất → bay lên 10-15 blocks → lao xuống → đánh Mace (sát thương x10-15!)
 
 ### Quản lý inventory:
 - Tự động phân tích 36 slots trong inventory
 - Sắp xếp vũ khí vào hotbar theo độ ưu tiên
 - Tự động mặc giáp tốt nhất (Netherite > Diamond > Iron > Chain > Gold > Leather)
+- Tự động cầm Totem of Undying khi máu < 30% hoặc không có shield
 - Ưu tiên vũ khí có enchant
 
 ## Tùy chỉnh nâng cao
@@ -168,6 +172,8 @@ Phiên bản 1.3.0 (HIỆN TẠI):
 - Phân tích và sắp xếp vũ khí trong inventory
 - Kết hợp vũ khí thông minh theo tình huống
 - Hỗ trợ 10+ loại vũ khí
+- Combo Wind Charge + Mace như cao thủ PvP (ném xuống đất → bay lên → đánh Mace)
+- Tự động cầm Totem of Undying khi máu thấp
 
 Phiên bản 1.4.0 (TIẾP THEO):
 - File cấu hình (config) cho phép người dùng tùy chỉnh
