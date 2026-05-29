@@ -21,9 +21,20 @@ jobs:
           distribution: 'microsoft'
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
+      - name: check repository contents
+        run: |
+          echo "=== Root directory ==="
+          ls -la
+          echo "=== Source directory ==="
+          ls -la src/ || echo "No src directory"
+          echo "=== Gradle files ==="
+          cat gradle.properties
+      - name: setup gradle
+        run: ./gradlew --version
       - name: build
-        run: ./gradlew build --stacktrace --info
+        run: ./gradlew build --stacktrace --no-daemon
       - name: list build output
+        if: always()
         run: |
           echo "=== Checking build directory ==="
           ls -la build/ || echo "No build directory"
