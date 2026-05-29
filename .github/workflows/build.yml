@@ -22,9 +22,15 @@ jobs:
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
       - name: build
-        run: ./gradlew build
+        run: ./gradlew build --stacktrace --info
       - name: list build output
-        run: ls -la build/libs/
+        run: |
+          echo "=== Checking build directory ==="
+          ls -la build/ || echo "No build directory"
+          echo "=== Checking build/libs ==="
+          ls -la build/libs/ || echo "No build/libs directory"
+          echo "=== Finding all JAR files ==="
+          find . -name "*.jar" -type f || echo "No JAR files found"
       - name: capture build artifacts
         if: success()
         uses: actions/upload-artifact@v4
